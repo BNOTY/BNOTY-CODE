@@ -1,5 +1,21 @@
 const firebaseConfig = {
-  //Insert Firebase Info
+  // apiKey: "AIzaSyC4bhvgrZnBlZa63HOjr4YWb0vPUEy0TNs",
+  // authDomain: "bnoty-ae856.firebaseapp.com",
+  // databaseURL: "https://bnoty-ae856-default-rtdb.firebaseio.com",
+  // projectId: "bnoty-ae856",
+  // storageBucket: "bnoty-ae856.appspot.com",
+  // messagingSenderId: "109988155599",
+  // appId: "1:109988155599:web:24fc23b8766d44363a27ba",
+  // measurementId: "G-J5849SYJY8",
+  apiKey: "AIzaSyALSkDo_nYey6fbcEPNkTnzuMZsGuzF5oQ",
+  authDomain: "bnoty-1d9ee.firebaseapp.com",
+  databaseURL:
+    "https://bnoty-1d9ee-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "bnoty-1d9ee",
+  storageBucket: "bnoty-1d9ee.appspot.com",
+  messagingSenderId: "242015103962",
+  appId: "1:242015103962:web:6c56dad160e5232b64eee3",
+  measurementId: "G-90EW45MQ3N",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -86,7 +102,9 @@ async function timeCompare(res, urlMessage) {
         ["userVol" + urlMessage]: userVol,
         ["preVol" + urlMessage]: pageVol,
       },
-      function () {}
+      function () {
+
+      }
     );
   } else {
     await chrome.storage.local.set(
@@ -96,7 +114,8 @@ async function timeCompare(res, urlMessage) {
         ["userVol" + urlMessage]: 0,
         ["preVol" + urlMessage]: 0,
       },
-      function () {}
+      function () {
+      }
     );
   }
 }
@@ -109,10 +128,11 @@ async function getVolume(str) {
 
   let vol = getByteLengthOfString(str);
 
-  return Math.ceil(vol / 1000); //
+  return Math.ceil(vol / 1000); // 
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
+
   if (msg.method == "save") {
     chrome.identity.getProfileUserInfo(
       { accountStatus: "ANY" },
@@ -156,6 +176,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
                   JSON.stringify(msg.link)
                 );
                 window.localStorage.setItem("time" + msg.url, msg.time);
+
               } else {
                 if (urlCheck.empty) {
                   user
@@ -173,7 +194,9 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
                         volume: configVol + userVol,
                       });
                     })
-                    .catch(function (error) {});
+                    .catch(function (error) {
+
+                    });
                 } else {
                   const dq = await user
                     .collection("dataQuery")
@@ -195,7 +218,9 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
                         volume: configVol + userVol - previousVol,
                       });
                     })
-                    .catch(function (error) {});
+                    .catch(function (error) {
+
+                    });
                 } // urlcheck end
               } // overVolume end
               return false;
